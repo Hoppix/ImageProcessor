@@ -7,7 +7,6 @@ public class ImageGUI
 {
 	private JFrame frame;
 	private JPanel panel;
-	private JLabel label;
 
 	public ImageGUI()
 	{
@@ -18,8 +17,9 @@ public class ImageGUI
 
 	public void updatePanel(BufferedImage iterationImage)
 	{
+		JLabel label = new JLabel(new ImageIcon(iterationImage));
+
 		panel = new JPanel();
-		label = new JLabel(new ImageIcon(iterationImage));
 		panel.add(label);
 		frame.add(panel);
 		frame.pack();

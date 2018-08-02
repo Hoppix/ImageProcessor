@@ -12,7 +12,7 @@ public class OvalDrawer implements Drawable
 	}
 
 
-	public void drawRandomOval(Graphics gA, int x, int y)
+	private void drawRandomOval(Graphics gA, int x, int y)
 	{
 		/**
 		 * Create random values for Image

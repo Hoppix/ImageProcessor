@@ -11,7 +11,7 @@ public class TriangleDrawer implements Drawable
 		drawRandomTriangle(g, x, y);
 	}
 
-	public void drawRandomTriangle(Graphics gA, int x, int y)
+	private void drawRandomTriangle(Graphics gA, int x, int y)
 	{
 		/**
 		 * Create random values for Image
@@ -29,7 +29,6 @@ public class TriangleDrawer implements Drawable
 		//TODO improve color selection
 
 		drawTriangle(gA, x1, y1, x2, y2);
-		//drawOval(gA, x1, y1, x2, y2);
 	}
 
 	private void drawTriangle(Graphics g, int x1, int y1, int x2, int y2)

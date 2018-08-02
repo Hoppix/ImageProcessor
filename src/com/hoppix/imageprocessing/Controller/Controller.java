@@ -14,7 +14,6 @@ import java.lang.ref.WeakReference;
 public class Controller
 {
 	private ImageGUI gui;
-	private final String FILENAME;
 	private final int iterations = 5000;
 
 	private int imgOriginalHeight;
@@ -28,14 +27,13 @@ public class Controller
 	public Controller(ImageGUI gui, String filename)
 	{
 		this.gui = gui;
-		FILENAME = filename;
 		draw = new OvalDrawer();
 
 		imgOriginal = null;
 
 		try
 		{
-			imgOriginal = ImageIO.read(new File(FILENAME));
+			imgOriginal = ImageIO.read(new File(filename));
 		}
 		catch (IOException e)
 		{
@@ -49,8 +47,8 @@ public class Controller
 
 	public void run()
 	{
-		/**
-		 * ITERATION START
+		/*
+		  ITERATION START
 		 */
 		for (int i = 0; i < iterations; i++)
 		{
@@ -71,12 +69,12 @@ public class Controller
 			}
 			printStatus(i);
 		}
-		/**
-		 * ITERATION END
+		/*
+		  ITERATION END
 		 */
 
-		/**
-		 * FINISHED
+		/*
+		  FINISHED
 		 */
 		saveImage(iterationImage);
 	}
