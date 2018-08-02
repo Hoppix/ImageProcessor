@@ -1,0 +1,2 @@
+# ImageProcessor
+Image aproximation algorithm
