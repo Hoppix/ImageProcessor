@@ -1,6 +1,7 @@
 package com.hoppix.imageprocessing.Controller;
 
 import com.hoppix.imageprocessing.Model.Drawable;
+import com.hoppix.imageprocessing.Model.TriangleDrawer;
 import com.hoppix.imageprocessing.View.ImageGUI;
 import com.hoppix.imageprocessing.Model.OvalDrawer;
 
@@ -9,12 +10,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 
 public class Controller
 {
 	private ImageGUI gui;
-	private final int iterations = 5000;
+	private final int iterations = 25000;
 
 	private int imgOriginalHeight;
 	private int imgOriginalWidth;
@@ -27,7 +27,6 @@ public class Controller
 	public Controller(ImageGUI gui, String filename)
 	{
 		this.gui = gui;
-		draw = new OvalDrawer();
 
 		imgOriginal = null;
 
@@ -40,34 +39,39 @@ public class Controller
 			e.printStackTrace();
 		}
 
+		draw = new TriangleDrawer(imgOriginal);
 		imgOriginalHeight = imgOriginal.getHeight();
 		imgOriginalWidth = imgOriginal.getWidth();
-		createIterationImage(Color.white);
+		createIterationImage(Color.gray);
 	}
 
 	public void run()
 	{
+		BufferedImage processImage = new BufferedImage(imgOriginalWidth, imgOriginalHeight, BufferedImage.TYPE_INT_RGB);
+		Graphics processImageGraphics = processImage.createGraphics();
+
+		Graphics iterationImaggeGraphics = iterationImage.createGraphics();
+
 		/*
 		  ITERATION START
 		 */
 		for (int i = 0; i < iterations; i++)
 		{
-			WeakReference<BufferedImage> imgProcess = new WeakReference<>(new BufferedImage(imgOriginalWidth, imgOriginalHeight, BufferedImage.TYPE_INT_RGB));
+			processImageGraphics.clearRect(0,0, imgOriginalWidth, imgOriginalHeight);
+			processImageGraphics.drawImage(iterationImage, 0, 0, null);
 
-			Graphics graphics = imgProcess.get().createGraphics();
-			graphics.drawImage(iterationImage, 0, 0, null);
+			draw.drawRandom(processImageGraphics, imgOriginalWidth, imgOriginalHeight);
 
-			draw.drawRandom(graphics, imgOriginalWidth, imgOriginalHeight);
-
-			double percentageNew = getDifferencePercent(imgOriginal, imgProcess.get());
+			double percentageNew = getDifferencePercent(imgOriginal, processImage);
 			double percentageOld = getDifferencePercent(imgOriginal, iterationImage);
 
 			if (percentageNew < percentageOld)
 			{
-				iterationImage = imgProcess.get();
+				iterationImaggeGraphics.drawImage(processImage, 0, 0, null);
+
+				printStatus(i);
 				gui.updatePanel(iterationImage);
 			}
-			printStatus(i);
 		}
 		/*
 		  ITERATION END

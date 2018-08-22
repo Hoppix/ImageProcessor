@@ -1,10 +1,16 @@
 package com.hoppix.imageprocessing.Model;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class OvalDrawer implements Drawable
+public class OvalDrawer extends AbstractDrawer implements Drawable
 {
+	public OvalDrawer(BufferedImage original)
+	{
+		super(original);
+	}
+
 	@Override
 	public void drawRandom(Graphics g, int x, int y)
 	{
@@ -25,7 +31,7 @@ public class OvalDrawer implements Drawable
 		double r = new Random().nextFloat() * (1.0 + 0.0000000001);
 		double g = new Random().nextFloat() * (1.0 + 0.0000000001);
 		double b = new Random().nextFloat() * (1.0 + 0.0000000001);
-		Color c = new Color((float) r, (float) g, (float) b, 0.5F);
+		Color c = getRandomImageColor();
 		gA.setColor(c);
 
 		drawOval(gA, x1, y1, x2, y2);

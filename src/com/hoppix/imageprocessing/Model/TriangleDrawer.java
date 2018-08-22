@@ -1,10 +1,16 @@
 package com.hoppix.imageprocessing.Model;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class TriangleDrawer implements Drawable
+public class TriangleDrawer extends AbstractDrawer implements Drawable
 {
+	public TriangleDrawer(BufferedImage original)
+	{
+		super(original);
+	}
+
 	@Override
 	public void drawRandom(Graphics g, int x, int y)
 	{
@@ -24,7 +30,7 @@ public class TriangleDrawer implements Drawable
 		double r = new Random().nextFloat() * (1.0 + 0.0000000001);
 		double g = new Random().nextFloat() * (1.0 + 0.0000000001);
 		double b = new Random().nextFloat() * (1.0 + 0.0000000001);
-		Color c = new Color((float) r, (float) g, (float) b, 0.5F);
+		Color c = getRandomImageColor();
 		gA.setColor(c);
 		//TODO improve color selection
 
@@ -38,7 +44,5 @@ public class TriangleDrawer implements Drawable
 
 		Polygon p = new Polygon(arrayX, arrayY, 3);
 		g.fillPolygon(p);
-
-		g.fillOval(x1, y1, Math.abs(x2 - x1), Math.abs(y2 - y1));
 	}
 }
