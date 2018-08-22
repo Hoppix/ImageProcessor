@@ -3,7 +3,6 @@ package com.hoppix.imageprocessing.Controller;
 import com.hoppix.imageprocessing.Model.Drawable;
 import com.hoppix.imageprocessing.Model.TriangleDrawer;
 import com.hoppix.imageprocessing.View.ImageGUI;
-import com.hoppix.imageprocessing.Model.OvalDrawer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

@@ -32,7 +32,6 @@ public class TriangleDrawer extends AbstractDrawer implements Drawable
 		double b = new Random().nextFloat() * (1.0 + 0.0000000001);
 		Color c = getRandomImageColor();
 		gA.setColor(c);
-		//TODO improve color selection
 
 		drawTriangle(gA, x1, y1, x2, y2);
 	}
